@@ -11,3 +11,5 @@ git clone https://github.com/zzh8829/dotfiles.git
 cd dotfiles
 ./linux.sh
 ./dotfiles.sh
+
+exec zsh -l
