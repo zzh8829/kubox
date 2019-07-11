@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -yqq \
     git \
     zsh \
     sudo \
-    nano \
+    vim \
     build-essential \
     wget \
     rsync
