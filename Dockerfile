@@ -7,7 +7,13 @@ RUN apt-get update && apt-get install -yqq \
     gnupg-agent \
     software-properties-common \
     git \
-    zsh
+    zsh \
+    sudo \
+    nano \
+    build-essential \
+    wget \
+    rsync
+
 
 # Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -20,6 +26,8 @@ RUN apt-get update && apt-get install -yqq \
 
 # New User
 RUN useradd --create-home --shell /bin/zsh kubox
+# RUN usermod -a -G sudo kubox
+RUN echo "kubox ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER kubox
 WORKDIR /home/kubox
 
