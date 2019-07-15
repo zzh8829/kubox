@@ -9,11 +9,19 @@ RUN apt-get update && apt-get install -yqq \
     git \
     zsh \
     sudo \
-    vim \
+    neovim \
     build-essential \
     wget \
-    rsync
+    rsync \
+    openssh-server \
+    mosh \
+    locales \
+    htop
 
+# SSH Mosh
+RUN sed -r -i 's/^#Port .*/Port 50022/g' /etc/ssh/sshd_config
+RUN sed -r -i 's/^#PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config
+RUN sed -r -i 's/^#PasswordAuthentication .*/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
 # Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -31,6 +39,8 @@ RUN echo "kubox ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER kubox
 WORKDIR /home/kubox
 
+COPY entrypoint.sh /
 COPY kubox-init.sh /
 
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "zsh" ]

@@ -11,6 +11,7 @@ Dev boxes should be containerized and cloud native too.
 - Home directory on Persistent volume
 - Dev Environment setup using [zzh8829/dotfiles](https://github.com/zzh8829/dotfiles)
 - No more one-off ad-hoc droplet/ec2/vps
+- ssh port tcp:50022, mosh port udp:50023
 
 ## Usage
 

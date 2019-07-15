@@ -25,6 +25,11 @@ spec:
               name: kubox
             - mountPath: /var/run/docker.sock
               name: docker-sock
+          ports:
+          - hostPort: 50022
+            name: ssh
+          - hostPort: 50023
+            name: mosh
       volumes:
         - name: kubox
           persistentVolumeClaim:
@@ -32,3 +37,18 @@ spec:
         - name: docker-sock
           hostPath:
             path: /var/run/docker.sock
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubox
+  labels:
+    app: kubox
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: kubox.zihao.me
+    external-dns.alpha.kubernetes.io/use-external-host-ip: "true"
+spec:
+  selector:
+    app: kubox
+  type: ClusterIP
+  clusterIP: None
