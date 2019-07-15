@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -yqq \
     locales \
     htop
 
+# Locale
+RUN locale-gen en_US.UTF-8
+
 # SSH Mosh
 RUN sed -r -i 's/^#Port .*/Port 50022/g' /etc/ssh/sshd_config
 RUN sed -r -i 's/^#PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config

@@ -4,6 +4,11 @@ On-demand dev box on kubernetes cluster
 
 Dev boxes should be containerized and cloud native too.
 
+Supports 3 modes of connection
+- kubectl exec (tunnel through http works anywhere)
+- ssh (port 50022, better performance, needs ssh connection)
+- mosh (port 50023, best performance, needs UDP connection)
+
 ## Features
 
 - Remote development anywhere
@@ -27,3 +32,14 @@ source /kubox-init.sh
 
 - Docker run works but mounting directory is difficult
 - Docker build depends on host docker version
+
+
+## Other steps
+
+```
+# copy ssh key
+kubectl cp ~/.ssh/id_rsa.pub $KUBOX_POD:/home/kubox/.ssh/authorized_keys
+
+# gen ssh key
+ssh-keygen -N "" -C kubox
+```
