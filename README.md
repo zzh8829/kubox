@@ -22,10 +22,12 @@ Supports 3 modes of connection
 
 ```bash
 kubectl apply -f .
-./shell.sh
+./shell # kubectl exec
 
-# initialize the kubox env for the first time
-source /kubox-init.sh
+# copy ssh key
+kubectl cp ~/.ssh/id_rsa.pub $KUBOX_POD:/home/kubox/.ssh/authorized_keys
+./shell mosh # mosh
+./shell ssh # ssh
 ```
 
 ## Downside
@@ -38,7 +40,7 @@ source /kubox-init.sh
 
 ```
 # copy ssh key
-kubectl cp ~/.ssh/id_rsa.pub $KUBOX_POD:/home/kubox/.ssh/authorized_keys
+
 
 # gen ssh key
 ssh-keygen -N "" -C kubox
