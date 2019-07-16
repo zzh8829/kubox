@@ -2,7 +2,7 @@
 
 sudo service ssh restart
 
-DOTFILES_VERSION=v0.0.1
+DOTFILES_VERSION=v0.0.2
 
 if [[ ! -z ~/.dotfiles ]] || [[ $(cd ~/.dotfiles && git describe --tags) != $DOTFILES_VERSION ]]; then
     echo "Initializing kubox"

@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -yqq \
     openssh-server \
     mosh \
     locales \
-    htop
+    htop \
+    tmux
 
 # Locale
 RUN locale-gen en_US.UTF-8
