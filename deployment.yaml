@@ -17,9 +17,7 @@ spec:
           image: zihao/play:kubox
           imagePullPolicy: Always
           command:
-            - sleep
-          args:
-            - infinity
+            - /kubox-init.sh
           volumeMounts:
             - mountPath: /home/kubox
               name: kubox

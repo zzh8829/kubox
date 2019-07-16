@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -yqq \
     git \
     zsh \
     sudo \
-    neovim \
     build-essential \
     wget \
     rsync \
