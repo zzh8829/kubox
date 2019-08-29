@@ -11,18 +11,19 @@ function _kubectl {
     exec kubectl exec -it $KUBOX_POD -- bash -c "$COMMAND"
 }
 
+SSH_CMD=${SSH_CMD:-ssh}
 SSH_OPTIONS="-o StrictHostKeyChecking=no -p 50022"
 
 function _ssh {
     KUBOX_NODE=$(kubectl get pods $KUBOX_POD -o jsonpath="{.spec.nodeName}")
     KUBOX_IP=$(kubectl get node $KUBOX_NODE -o json | grep ExternalIP -B 1 | grep -E -o "[0-9\.]+")
-    exec ssh -t $SSH_OPTIONS kubox@$KUBOX_IP "$COMMAND"
+    exec $SSH_CMD -t $SSH_OPTIONS kubox@$KUBOX_IP "$COMMAND"
 }
 
 function _mosh {
     KUBOX_NODE=$(kubectl get pods $KUBOX_POD -o jsonpath="{.spec.nodeName}")
     KUBOX_IP=$(kubectl get node $KUBOX_NODE -o json | grep ExternalIP -B 1 | grep -E -o "[0-9\.]+")
-    exec mosh --no-init --ssh="ssh $SSH_OPTIONS" -p 50023 kubox@$KUBOX_IP -- bash -c "$COMMAND"
+    exec mosh --no-init --ssh="$SSH_CMD $SSH_OPTIONS" -p 50023 kubox@$KUBOX_IP -- bash -c "$COMMAND"
 }
 
 if [[ $1 == mosh ]]; then
